@@ -24,13 +24,7 @@ class VertexCentricGraphDefinitionLineParserImpl : AbstractGraphDefinitionLinePa
         for (i in 1..lineSplit.size - 1) {
             val nextVertexInfo = lineSplit[i]
             var edgeLength = -1
-            if (!nextVertexInfo.contains(','))
-                vertexId = nextVertexInfo.toInt() - 1
-            else {
-                val vertexInfoSplit = nextVertexInfo.split(',')
-                vertexId = vertexInfoSplit[0].toInt() - 1
-                edgeLength = vertexInfoSplit[1].toInt()
-            }
+            vertexId = nextVertexInfo.toInt() - 1
 
             var nextHeadVertex: VertexImpl
 
@@ -41,7 +35,7 @@ class VertexCentricGraphDefinitionLineParserImpl : AbstractGraphDefinitionLinePa
                 loadingGraph.addVertex(nextHeadVertex)
             }
 
-            loadingGraph.addEdge(EdgeImpl(tailVertex, nextHeadVertex, edgeLength))
+            loadingGraph.addEdge(EdgeImpl(tailVertex, nextHeadVertex))
         }
     }
 }

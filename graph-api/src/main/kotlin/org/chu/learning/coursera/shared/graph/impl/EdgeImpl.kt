@@ -1,45 +1,34 @@
 package org.chu.learning.coursera.shared.graph.impl
 
-import org.chu.learning.coursera.shared.graph.model.Edge
 import org.chu.learning.coursera.shared.graph.model.MutableEdge
+import org.chu.learning.coursera.shared.graph.model.MutableVertex
 
-class EdgeImpl: Edge, MutableEdge {
-    private var tail: VertexImpl
-    private var head: VertexImpl
+class EdgeImpl: MutableEdge {
+    private var tail: MutableVertex
+    private var head: MutableVertex
 
-    private val length: Int
+    private var attributes: Any = Unit
 
-    constructor(tail: VertexImpl, head: VertexImpl, length: Int) {
+    constructor(tail: MutableVertex, head: MutableVertex) {
         this.tail = tail
         this.head = head
-        this.length = length
-
-        tail.addEdge(this)
-    }
-
-    constructor(tail: VertexImpl, head: VertexImpl) {
-        this.tail = tail
-        this.head = head
-        this.length = -1
 
         tail.addEdge(this)
     }
 
     override fun toString(): String {
-        return "(${tail.getId()}, ${head.getId()}) of ${length}"
+        return "(${tail.getId()}, ${head.getId()})"
     }
 
     override fun getHead() = head
 
     override fun getTail() = tail
 
-    fun getLength() = length
-
-    override fun updateHead(newHead: VertexImpl) {
+    override fun updateHead(newHead: MutableVertex) {
         this.head = newHead
     }
 
-    override fun updateTail(newTail: VertexImpl) {
+    override fun updateTail(newTail: MutableVertex) {
         this.tail = newTail
     }
 
@@ -51,5 +40,11 @@ class EdgeImpl: Edge, MutableEdge {
 
         this.tail = head
         this.head = exchTail
+    }
+
+    override fun getAttributes() = attributes
+
+    override fun setAttributes(attributes: Any) {
+        this.attributes = attributes
     }
 }

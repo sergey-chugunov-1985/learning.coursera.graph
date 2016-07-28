@@ -1,11 +1,9 @@
 package org.chu.learning.coursera.shared.graph.model
 
-import org.chu.learning.coursera.shared.graph.impl.VertexImpl
+interface MutableEdge: Edge {
+    fun updateTail(newTail: MutableVertex)
 
-interface MutableEdge {
-    fun updateTail(newTail: VertexImpl)
-
-    fun updateHead(newHead: VertexImpl)
+    fun updateHead(newHead: MutableVertex)
 
     fun reverseEdge()
 }

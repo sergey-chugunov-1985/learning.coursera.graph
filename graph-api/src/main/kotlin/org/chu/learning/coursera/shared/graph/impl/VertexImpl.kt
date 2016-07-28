@@ -4,13 +4,11 @@ import org.chu.learning.coursera.shared.graph.model.MutableVertex
 import org.chu.learning.coursera.shared.graph.model.Vertex
 import java.util.LinkedList
 
-class VertexImpl(private val id: Int): Vertex, MutableVertex {
+class VertexImpl(private val id: Int): MutableVertex {
 
     private val edges: MutableList<EdgeImpl> = LinkedList()
 
-    private var visited = false
-
-    private var label = -1
+    private var attributes: Any = Unit
 
     override fun addEdge(edge: EdgeImpl) = edges.add(edge)
 
@@ -20,16 +18,10 @@ class VertexImpl(private val id: Int): Vertex, MutableVertex {
 
     override fun removeEdge(edge: EdgeImpl) = edges.remove(edge)
 
-    fun isVisited() = visited
+    override fun getAttributes() = attributes
 
-    fun setVisited(visited: Boolean) {
-        this.visited = visited
-    }
-
-    fun getLabel() = label
-
-    fun setLabel(label: Int) {
-        this.label = label
+    override fun setAttributes(attributes: Any) {
+        this.attributes = attributes
     }
 
     override fun toString(): String {
